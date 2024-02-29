@@ -454,7 +454,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     }   
     
     //TableCourseinstructor : tạo bảng
-    public DefaultTableModel setTableKH(List<Course> Listcourse,List<CourseInstructor> Listcourseinstructor, String[] listColumn){
+    public void setTableKH(List<Course> Listcourse,List<CourseInstructor> Listcourseinstructor, String[] listColumn){
         DefaultTableModel dtm = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {        //Không được chỉnh sửa hàng và cột của bảng
@@ -487,7 +487,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
             }
             
         }       
-        return dtm;
+        table = new JTable(dtm);
     }
     
 //  LoadTableCourseinstructor : load dữ liệu
@@ -500,8 +500,8 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
         List<Course> listcourse = coursebll.getAll();
         List<CourseInstructor> listcourseinstructor = courseinstructorbll.selectAll();
         
-        DefaultTableModel model = setTableKH(listcourse,listcourseinstructor, listColumn);
-        table = new JTable(model);
+        setTableKH(listcourse,listcourseinstructor, listColumn);
+        
         
         rowSorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(rowSorter);
