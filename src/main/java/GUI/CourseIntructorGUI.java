@@ -492,10 +492,6 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     
 //  LoadTableCourseinstructor : load dữ liệu
     
-    public java.sql.Date cover(java.util.Date d){
-        return new java.sql.Date(d.getTime());
-    }
-    
     public void setDateToTable(){
         List<Course> listcourse = coursebll.getAll();
         List<CourseInstructor> listcourseinstructor = courseinstructorbll.selectAll();
