@@ -1,7 +1,6 @@
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\checkError\check.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\DAO\ResultDAO.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\GUI\ResultGUI.java
-C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\GUI\quanLyPhanCongFix.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\GUI\statisticGUIfix.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\DTO\Person.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\GUI\AddCourse.java
@@ -15,6 +14,7 @@ C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\DTO\OfficeAssignment.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\DAO\DatabaseAccess.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\BUS\OnsiteCourseBUS.java
+C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\GUI\CourseIntructorGUI.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\DAO\OnsiteCourseDAO.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\BUS\DepartmentBUS.java
 C:\Users\Admin\Documents\MoHinhPhanLop\QuanLyKhoaHoc\QuanLyKhoaHoc\src\main\java\DTO\Course.java

@@ -216,6 +216,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
 
         btnsave.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         btnsave.setText("Lưu");
+        btnsave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnsave.setPreferredSize(new java.awt.Dimension(80, 30));
         btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +227,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
 
         btnremove.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         btnremove.setText("Xóa");
+        btnremove.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnremove.setPreferredSize(new java.awt.Dimension(80, 30));
         btnremove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,6 +262,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
 
         btnstatis.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         btnstatis.setText("XEM THỐNG KÊ DANH SÁCH LỚP");
+        btnstatis.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnstatis.setPreferredSize(new java.awt.Dimension(260, 40));
         btnstatis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,10 +399,10 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
             courseinstructorDTO.setCourseID(Integer.parseInt(jtfCourseID.getText()));
             courseinstructorDTO.setPersonID(Integer.parseInt(jboxPersonID.getSelectedItem().toString()));
             if(courseinstructorbll.selectById(courseinstructorDTO)==null){  
-                //method them
+                //thêm phân công
                 addCourseinstructor(courseinstructorDTO);
             }else {
-                //update
+                //cập nhật phân công
                 updateCourseinstructor(courseinstructorDTO);
             }
             setDateToTable();   
@@ -408,6 +411,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btnsaveActionPerformed
        
     public void addCourseinstructor(CourseInstructor t){
+        //thêm phân công
         if(courseinstructorbll.insert(t)==1){
             JOptionPane.showMessageDialog(null, "Lưu thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }else {
@@ -416,6 +420,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     }
    
      public void updateCourseinstructor(CourseInstructor t){
+        //cập nhật phân công
         if(courseinstructorbll.update(t)==1){
             JOptionPane.showMessageDialog(null, "Lưu thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }else {
@@ -425,37 +430,35 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     
     
     private void btnstatisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstatisActionPerformed
-    statisticGUI = new statisticGUIfix(this, rootPaneCheckingEnabled);
-    statisticGUI.setVisible(true);
+        //Hiển thị giao diện thống kê
+        statisticGUI = new statisticGUIfix(this, rootPaneCheckingEnabled);
+        statisticGUI.setVisible(true);
     }//GEN-LAST:event_btnstatisActionPerformed
 
     private void btnremoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnremoveActionPerformed
-//        chức năng xóa
+//  chức năng xóa
     CourseInstructor courseinstructorDTO= new CourseInstructor();       
     if (jtfCourseID.getText().equals("")||jboxPersonID.getSelectedItem().equals("None"))
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn khóa học hoặc khóa học chưa được phân công!", "Thông báo", JOptionPane.WARNING_MESSAGE);             
     else{
             courseinstructorDTO.setCourseID(Integer.parseInt(jtfCourseID.getText()));
             courseinstructorDTO.setPersonID(Integer.parseInt(jboxPersonID.getSelectedItem().toString()));
-//            if(courseinstructorbll.delete(courseinstructorDTO)==1){
-//                JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-//            }else {
-//                JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-//            }
+            //Xóa phân công
             deleteCourseinstructor(courseinstructorDTO);
             setDateToTable(); 
         }
     }//GEN-LAST:event_btnremoveActionPerformed
     
     public void deleteCourseinstructor(CourseInstructor t){
+        //Xóa phân công
         if(courseinstructorbll.delete(t)==1){
             JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
         }else {
             JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);   
         }
-    }
+    }   
     
-//TableCourseinstructor : tạo bảng
+    //TableCourseinstructor : tạo bảng
     public DefaultTableModel setTableKH(List<Course> Listcourse,List<CourseInstructor> Listcourseinstructor, String[] listColumn){
         DefaultTableModel dtm = new DefaultTableModel(){
             @Override
@@ -492,7 +495,8 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
         return dtm;
     }
     
-//    LoadTableCourseinstructor : load dữ liệu
+//  LoadTableCourseinstructor : load dữ liệu
+    
     public java.sql.Date cover(java.util.Date d){
         return new java.sql.Date(d.getTime());
     }
@@ -508,6 +512,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
         table.setRowSorter(rowSorter);
         
         jtfTim.getDocument().addDocumentListener(new DocumentListener() {
+        //tìm kiếm
             @Override
             public void insertUpdate(DocumentEvent e) {
                 String text = jtfTim.getText();
@@ -555,18 +560,17 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
                     }
                     if(model.getValueAt(SRow, 4) != null)
                         getJboxPersonID().setSelectedItem(model.getValueAt(SRow, 4).toString());
-
                 }
             }
             
         });
         //chỉnh tiêu đề
-       JTableHeader header = table.getTableHeader();
-       header.setFont(new Font("Tahoma", Font.BOLD, 14));
-       header.setPreferredSize(new Dimension(50, 50));
-       // Căn giữa tiêu đề theo chiều dọc
-       DefaultTableCellRenderer centerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
-       centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        JTableHeader header = table.getTableHeader();
+        header.setFont(new Font("Tahoma", Font.BOLD, 14));
+        header.setPreferredSize(new Dimension(50, 50));
+        // Căn giữa tiêu đề theo chiều dọc
+        DefaultTableCellRenderer centerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         table.validate();
         table.repaint();
         
