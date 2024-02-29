@@ -5,7 +5,6 @@
 package BUS;
 
 import DAO.OnsiteCourseDAO;
-import DTO.OnsiteCourse;
 
 /**
  *

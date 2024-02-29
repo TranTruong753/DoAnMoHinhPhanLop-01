@@ -6,8 +6,6 @@ package BUS;
 
 import DAO.CourseInstructorDAO;
 import DAO.PersonDAO;
-import DTO.CourseInstructor;
-import DTO.Person;
 import java.util.List;
 
 /**

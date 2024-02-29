@@ -10,10 +10,10 @@ import BUS.DepartmentBUS;
 import BUS.OnlineCourseBUS;
 import BUS.OnsiteCourseBUS;
 import BUS.ResultBUS;
-import DTO.Course;
-import DTO.OnlineCourse;
-import DTO.OnsiteCourse;
-import DTO.Department;
+import BUS.Course;
+import BUS.OnlineCourse;
+import BUS.OnsiteCourse;
+import BUS.Department;
 import java.awt.Dimension;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public class CourseGUI extends javax.swing.JFrame {
 
     private int SelectedIndexCombobox = 0;
-    ArrayList<DTO.Department> listDepartment = new ArrayList<>();
+    ArrayList<BUS.Department> listDepartment = new ArrayList<>();
     CourseBUS courseBUS = new CourseBUS();
     DepartmentBUS departmentBUS = new DepartmentBUS();
     OnlineCourseBUS onlineCourseBUS = new OnlineCourseBUS();

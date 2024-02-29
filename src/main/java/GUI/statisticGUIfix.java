@@ -5,7 +5,7 @@
 package GUI;
 
 import BUS.PersonBUS;
-import DTO.Person;
+import BUS.Person;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.util.List;

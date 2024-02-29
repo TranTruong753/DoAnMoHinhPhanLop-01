@@ -5,7 +5,6 @@
 package BUS;
 
 import DAO.OnlineCourseDAO;
-import DTO.OnlineCourse;
 import java.util.ArrayList;
 
 /**

@@ -6,9 +6,9 @@ package GUI;
 import BUS.CourseBUS;
 import BUS.CourseInstructorBUS;
 import BUS.PersonBUS;
-import DTO.Course;
-import DTO.CourseInstructor;
-import DTO.Person;
+import BUS.Course;
+import BUS.CourseInstructor;
+import BUS.Person;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -463,7 +463,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     public void setTableKH(List<Course> Listcourse,List<CourseInstructor> Listcourseinstructor, String[] listColumn){ 
         DefaultTableModel dtm = new DefaultTableModel(){
             @Override
-            public boolean isCellEditable(int row, int column) {        //Không được chỉnh sửa hàng và cột của bảng
+            public boolean isCellEditable(int row, int column) {//Không được chỉnh sửa hàng và cột của bảng
                 return false;
             }       
         };
@@ -474,7 +474,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
         if(rows > 0){
             for(int i = 0;i<rows;i++){
                 Course course = Listcourse.get(i);             
-                obj = new Object[columns];              //Mỗi phần tử trong mảng là một cột
+                obj = new Object[columns];  //Mỗi phần tử trong mảng là một cột
                 //obj[0] = (i+1);
                 // gán các thông tin khóa học vô cột của bảng
                 obj[0] = course.getCourseID();
@@ -511,7 +511,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
         
         setTableKH(listcourse,listcourseinstructor, listColumn);
         
-        
+        //giúp bảng có khả năng sắp xếp và lọc dữ liệu
         rowSorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(rowSorter);
         
@@ -541,17 +541,21 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
             }
         });
         
-        //chỉnh bảng
+        //chỉnh bảng cho đẹp
         table.setRowHeight(40);
         table.setFont(new Font("Tahoma",Font.PLAIN,14));
+        //xử lý sự kiện khi click vào 1 dòng trong bản
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //kiểm tra số lần click và đó có phải 1 dòng hay không
                 if(e.getClickCount()==1 && table.getSelectedRow() != -1){
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
-                    int SRow = table.getSelectedRow();                       //Lay Index dong duoc chon
-                    SRow = table.convertRowIndexToModel(SRow);     //Khi sap xep, Index dong duoc chon van dung                   
-                    
+                    //Lấy Index dòng được chọn
+                    int SRow = table.getSelectedRow();
+                    //khi sắp xếp, Index dòng được chọn vẫn dùng
+                    SRow = table.convertRowIndexToModel(SRow);                        
+                    //gán các thông tin của dòng vào các ô có sẵn
                     getJtfCourseID().setText( model.getValueAt(SRow, 0).toString());
                     getJtfTitle().setText(model.getValueAt(SRow,1).toString());
                     getJtfCredits().setText(model.getValueAt(SRow,2).toString());
@@ -577,7 +581,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         table.validate();
         table.repaint();
-        
+        //hiển thị bảng dữ liệu một cách thuận tiện và đảm bảo nó không bị tràn ra khỏi kích thước hiển thị
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.getViewport().add(table);
         scrollPane.setPreferredSize(new Dimension(800,400));

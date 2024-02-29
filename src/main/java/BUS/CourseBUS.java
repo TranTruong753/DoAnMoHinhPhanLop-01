@@ -5,7 +5,6 @@
 package BUS;
 
 import DAO.CourseDAO;
-import DTO.Course;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

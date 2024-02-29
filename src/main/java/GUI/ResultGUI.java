@@ -5,8 +5,8 @@
 package GUI;
 
 import BUS.ResultBUS;
-import DTO.Course;
-import DTO.StudentGrade;
+import BUS.Course;
+import BUS.StudentGrade;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;

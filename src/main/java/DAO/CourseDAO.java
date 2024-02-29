@@ -4,7 +4,7 @@
  */
 package DAO;
 
-import DTO.Course;
+import BUS.Course;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

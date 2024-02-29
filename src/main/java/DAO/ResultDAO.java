@@ -4,9 +4,9 @@
  */
 package DAO;
 
-import DTO.Course;
-import DTO.StudentGrade;
-import DTO.Person;
+import BUS.Course;
+import BUS.StudentGrade;
+import BUS.Person;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

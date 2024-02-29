@@ -4,8 +4,8 @@
  */
 package DAO;
 
-import DTO.Course;
-import DTO.OnlineCourse;
+import BUS.Course;
+import BUS.OnlineCourse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
-import DTO.CourseInstructor;
+import BUS.CourseInstructor;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

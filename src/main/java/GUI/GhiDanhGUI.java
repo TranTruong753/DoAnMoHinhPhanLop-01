@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import DTO.Person;
+import BUS.Person;
 import BUS.ResultBUS;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
