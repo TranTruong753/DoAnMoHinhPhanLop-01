@@ -386,17 +386,23 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
-    CourseInstructor courseinstructorDTO= new CourseInstructor();       
+        //tạo ra một đối tượng CourseInstructor mới
+        CourseInstructor courseinstructorDTO= new CourseInstructor();    
+        //kiểm tra điều kiện hợp lệ
         if (jtfCourseID.getText().equals("")||jboxPersonID.getSelectedItem().equals("None"))
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn khóa học hoặc chưa chọn giảng viên!", "Thông báo", JOptionPane.WARNING_MESSAGE);             
         else         
-        {
+        {   // thiết lập các thuộc tính cho đối tượng mới
             courseinstructorDTO.setCourseID(Integer.parseInt(jtfCourseID.getText()));
             courseinstructorDTO.setPersonID(Integer.parseInt(jboxPersonID.getSelectedItem().toString()));
+            //kiểm tra xem CourseID có trong bảng CourseInstructor chưa
+            //nếu chưa thì thêm 1 phân công mới
             if(courseinstructorbll.selectById(courseinstructorDTO)==null){  
                 //thêm phân công
                 addCourseinstructor(courseinstructorDTO);
-            }else {
+            }
+            //nếu đã có thì cập nhật lại phân công
+            else {
                 //cập nhật phân công
                 updateCourseinstructor(courseinstructorDTO);
             }
