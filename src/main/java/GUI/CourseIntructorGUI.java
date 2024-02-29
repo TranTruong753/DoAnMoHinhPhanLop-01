@@ -454,7 +454,7 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
     }   
     
     //TableCourseinstructor : tạo bảng
-    public void setTableKH(List<Course> Listcourse,List<CourseInstructor> Listcourseinstructor, String[] listColumn){
+    public void setTableKH(List<Course> Listcourse,List<CourseInstructor> Listcourseinstructor, String[] listColumn){ 
         DefaultTableModel dtm = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {        //Không được chỉnh sửa hàng và cột của bảng
@@ -470,15 +470,20 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
                 Course course = Listcourse.get(i);             
                 obj = new Object[columns];              //Mỗi phần tử trong mảng là một cột
                 //obj[0] = (i+1);
+                // gán các thông tin khóa học vô cột của bảng
                 obj[0] = course.getCourseID();
                 obj[1] = course.getTitle();
                 obj[2] = course.getCredits();
                 obj[3] = course.getDepartmentID();
+                // hàm for để tìm các khóa học đã được phân công
                 for (CourseInstructor Listcourseinstructor1 : Listcourseinstructor) {
                     CourseInstructor courseinstructor=Listcourseinstructor1;
+                    //nếu CourseID có trong CourseInstructor thì khóa học đã được phân công
                     if(courseinstructor.getCourseID()==course.getCourseID()){
+                        //khóa học đã được phân công sẽ có PersonID,gán PersonID vào cột của bảng
                         obj[4] = courseinstructor.getPersonID();
-                        Person ps=new Person();
+                        //từ PersonID tìm được Firstname và gán Firstname vào cột của bảng
+                        Person ps=new Person();                        
                         ps.setPersonID(courseinstructor.getPersonID());
                         obj[5] = personbll.selectById(ps).getFirstname();                                                
                     }
@@ -493,7 +498,9 @@ public class CourseIntructorGUI extends javax.swing.JDialog {
 //  LoadTableCourseinstructor : load dữ liệu
     
     public void setDateToTable(){
+        // Lấy danh sách của khóa học từ database
         List<Course> listcourse = coursebll.getAll();
+        // Lấy danh sách của phân công khóa học từ database
         List<CourseInstructor> listcourseinstructor = courseinstructorbll.selectAll();
         
         setTableKH(listcourse,listcourseinstructor, listColumn);
