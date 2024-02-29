@@ -150,7 +150,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void assignmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignmentBtnActionPerformed
         // TODO add your handling code here:
-        quanLyPhanCongFix quanLyPhanCong = new quanLyPhanCongFix(this, true);
+        CourseIntructorGUI quanLyPhanCong = new CourseIntructorGUI(this, true);
         quanLyPhanCong.setVisible(true);
 
     }//GEN-LAST:event_assignmentBtnActionPerformed

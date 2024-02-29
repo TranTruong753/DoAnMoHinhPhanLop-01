@@ -35,7 +35,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Admin
  */
-public class quanLyPhanCongFix extends javax.swing.JDialog {
+public class CourseIntructorGUI extends javax.swing.JDialog {
   
     private statisticGUIfix statisticGUI ;
     private CourseInstructorBUS courseinstructorbll =new CourseInstructorBUS();
@@ -47,7 +47,7 @@ public class quanLyPhanCongFix extends javax.swing.JDialog {
     private String[] listColumn = {"CouseID","Title", "Credits","Departments","PersonID","FirstName"};
     private TableRowSorter<TableModel> rowSorter = null;
     
-    public quanLyPhanCongFix(java.awt.Frame parent, boolean modal) {
+    public CourseIntructorGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setDateToTable();
@@ -389,35 +389,41 @@ public class quanLyPhanCongFix extends javax.swing.JDialog {
 
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
     CourseInstructor courseinstructorDTO= new CourseInstructor();       
-        if (jtfCourseID.getText().equals(""))
-            JOptionPane.showMessageDialog(null, "Hãy chọn khoa hoc!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        else if(jboxPersonID.getSelectedItem().equals("null"))
-            JOptionPane.showMessageDialog(null, "Hãy chọn giảng viên dạy!", "Thông báo", JOptionPane.WARNING_MESSAGE);        
-        else
-            
+        if (jtfCourseID.getText().equals("")||jboxPersonID.getSelectedItem().equals("None"))
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn khóa học hoặc chưa chọn giảng viên!", "Thông báo", JOptionPane.WARNING_MESSAGE);             
+        else         
         {
             courseinstructorDTO.setCourseID(Integer.parseInt(jtfCourseID.getText()));
             courseinstructorDTO.setPersonID(Integer.parseInt(jboxPersonID.getSelectedItem().toString()));
-            if(courseinstructorbll.selectById(courseinstructorDTO)==null){
-                
-                if(courseinstructorbll.insert(courseinstructorDTO)==1)
-                JOptionPane.showMessageDialog(null, "Lưu thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-            else 
-                JOptionPane.showMessageDialog(null, "Lưu thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);                             
+            if(courseinstructorbll.selectById(courseinstructorDTO)==null){  
+                //method them
+                addCourseinstructor(courseinstructorDTO);
+            }else {
+                //update
+                updateCourseinstructor(courseinstructorDTO);
             }
-            else
-            {
-                if(courseinstructorbll.update(courseinstructorDTO)==1)
-                JOptionPane.showMessageDialog(null, "Lưu thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-             else 
-                 JOptionPane.showMessageDialog(null, "Lưu thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-                
-            }
-            setDateToTable();    
+            setDateToTable();   
         }
        
     }//GEN-LAST:event_btnsaveActionPerformed
-
+       
+    public void addCourseinstructor(CourseInstructor t){
+        if(courseinstructorbll.insert(t)==1){
+            JOptionPane.showMessageDialog(null, "Lưu thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null, "Lưu thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);   
+        }
+    }
+   
+     public void updateCourseinstructor(CourseInstructor t){
+        if(courseinstructorbll.update(t)==1){
+            JOptionPane.showMessageDialog(null, "Lưu thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null, "Lưu thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);   
+        }
+    }
+    
+    
     private void btnstatisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstatisActionPerformed
     statisticGUI = new statisticGUIfix(this, rootPaneCheckingEnabled);
     statisticGUI.setVisible(true);
@@ -426,21 +432,28 @@ public class quanLyPhanCongFix extends javax.swing.JDialog {
     private void btnremoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnremoveActionPerformed
 //        chức năng xóa
     CourseInstructor courseinstructorDTO= new CourseInstructor();       
-      if (jtfCourseID.getText().equals(""))
-          JOptionPane.showMessageDialog(null, "Hãy chọn khóa hoc để xóa phân công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-      else if(jboxPersonID.getSelectedItem().equals("null"))
-            JOptionPane.showMessageDialog(null, "Khóa hoc chưa được phân công!", "Thông báo", JOptionPane.WARNING_MESSAGE);       
-      else{
-          courseinstructorDTO.setCourseID(Integer.parseInt(jtfCourseID.getText()));
-          courseinstructorDTO.setPersonID(Integer.parseInt(jboxPersonID.getSelectedItem().toString()));
-          if(courseinstructorbll.delete(courseinstructorDTO)==1){
-              JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-          }else {
-              JOptionPane.showMessageDialog(null, "Xóa thất bại công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
-          }
-          setDateToTable(); 
-      }
+    if (jtfCourseID.getText().equals("")||jboxPersonID.getSelectedItem().equals("None"))
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn khóa học hoặc khóa học chưa được phân công!", "Thông báo", JOptionPane.WARNING_MESSAGE);             
+    else{
+            courseinstructorDTO.setCourseID(Integer.parseInt(jtfCourseID.getText()));
+            courseinstructorDTO.setPersonID(Integer.parseInt(jboxPersonID.getSelectedItem().toString()));
+//            if(courseinstructorbll.delete(courseinstructorDTO)==1){
+//                JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+//            }else {
+//                JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+//            }
+            deleteCourseinstructor(courseinstructorDTO);
+            setDateToTable(); 
+        }
     }//GEN-LAST:event_btnremoveActionPerformed
+    
+    public void deleteCourseinstructor(CourseInstructor t){
+        if(courseinstructorbll.delete(t)==1){
+            JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(null, "Xóa thất bại!", "Thông báo", JOptionPane.WARNING_MESSAGE);   
+        }
+    }
     
 //TableCourseinstructor : tạo bảng
     public DefaultTableModel setTableKH(List<Course> Listcourse,List<CourseInstructor> Listcourseinstructor, String[] listColumn){
@@ -535,7 +548,7 @@ public class quanLyPhanCongFix extends javax.swing.JDialog {
                     getJtfCredits().setText(model.getValueAt(SRow,2).toString());
                     getJtfDepartment().setText(model.getValueAt(SRow,3).toString());
                     getJboxPersonID().removeAllItems();
-                    getJboxPersonID().addItem("null");
+                    getJboxPersonID().addItem("None");
                     for(Person ps: listps){
                         if(ps.getHireDate()!=null)
                             getJboxPersonID().addItem(""+ps.getPersonID());
@@ -624,21 +637,23 @@ public class quanLyPhanCongFix extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(quanLyPhanCongFix.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseIntructorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(quanLyPhanCongFix.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseIntructorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(quanLyPhanCongFix.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseIntructorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(quanLyPhanCongFix.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CourseIntructorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                quanLyPhanCongFix dialog = new quanLyPhanCongFix(new javax.swing.JFrame(), true);
+                CourseIntructorGUI dialog = new CourseIntructorGUI(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
