@@ -192,10 +192,10 @@ public class GhiDanhGUI extends javax.swing.JDialog {
                 mh.setLastname(txt_lastname.getText());
                
                 JOptionPane.showMessageDialog(this,resultBUS.AddPerson(mh) );
-               
+                setVisible(false);
             }
-        } catch (NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Thong tin khong hop le");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_luuActionPerformed
 
