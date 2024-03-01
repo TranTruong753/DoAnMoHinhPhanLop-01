@@ -30,13 +30,13 @@ public class CourseBUS {
         }
         return null;
     }
-    //thêm 1 khóa học trong bảng onlinecourse
+    //thêm 1 khóa học trong bảng course
     public boolean insert(Course c) 
     {
         return courseDAO.insert(c);
     }
     
-    //sửa 1 khóa học trong bảng onlinecourse
+    //sửa 1 khóa học trong bảng course
     public boolean update(Course c) 
     {
         return courseDAO.update(c);
@@ -62,7 +62,7 @@ public class CourseBUS {
        return list.get(list.size()-1).getCourseID();
    }
    
-    // lấy ra khóa học thông qua mã
+     //  tìm kiếm khóa học theo từ khóa, và mục cần tìm
     public ArrayList<Course> findCourse(String key, int selectedIndexComboboxSearch) {
         return courseDAO.findCourse(key, selectedIndexComboboxSearch);
     }

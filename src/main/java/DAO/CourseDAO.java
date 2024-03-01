@@ -99,7 +99,7 @@ public class CourseDAO {
     }
 
 
-    //  tìm kiếm khóa học theo mã
+    //  tìm kiếm khóa học theo từ khóa, và mục cần tìm
     public ArrayList<Course> findCourse(String key, int selectedIndexCombobox) {
         ArrayList<Course> courseList = new ArrayList<Course>();
         String cln = "";
