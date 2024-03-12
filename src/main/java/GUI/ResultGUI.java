@@ -37,6 +37,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -199,8 +201,21 @@ public class ResultGUI extends javax.swing.JFrame {
                 return super.stopCellEditing();
             }
         });
-    }
+        tblStudent.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int currentRow = tblStudent.getSelectedRow();
+                    tblStudent.changeSelection(currentRow, 4, false, false);
+                    tblStudent.requestFocusInWindow();
 
+                }
+            }
+        });
+    }
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

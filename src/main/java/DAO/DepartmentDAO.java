@@ -35,6 +35,7 @@ public class DepartmentDAO {
                 tmp.setAdministrator(rs.getInt(5));
                 list.add(tmp);
             }
+            conn.close();
             return list;
         } catch (Exception e) {
             System.out.println(e.toString());
