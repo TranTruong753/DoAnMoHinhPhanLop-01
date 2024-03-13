@@ -27,7 +27,6 @@ public class ResultDAO {
     ArrayList<Course> courseInfoListOnl = new ArrayList<>();
     ArrayList<Course> courseInfoListOff = new ArrayList<>();
     ArrayList<StudentGrade> ListStudentGrade = new ArrayList<>();
-    
 
     public ArrayList<StudentGrade> GetStudent(int courseid) {
         try {
@@ -48,6 +47,7 @@ public class ResultDAO {
                 std.setGrade(rs.getDouble("grade"));
                 ListStudentGrade.add(std);
             }
+            conn.close();
             return ListStudentGrade;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,15 +60,16 @@ public class ResultDAO {
             Connection conn = dtb.getConnection();
             String sql = "UPDATE studentgrade SET grade = ? WHERE studentid = ? AND courseid = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            
+
             for (Object[] rowData : data) {
-                double grade = Double.parseDouble(rowData[1].toString()); 
+                double grade = Double.parseDouble(rowData[1].toString());
                 int studentid = (int) rowData[0];
                 stmt.setDouble(1, grade);
                 stmt.setInt(2, studentid);
                 stmt.setInt(3, courseid);
                 stmt.executeUpdate();
             }
+            conn.close();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,6 +96,7 @@ public class ResultDAO {
                 onl.setTitle(title);
                 courseInfoListOnl.add(onl);
             }
+            conn.close();
             return courseInfoListOnl;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,12 +123,14 @@ public class ResultDAO {
                 off.setTitle(title);
                 courseInfoListOff.add(off);
             }
+            conn.close();
             return courseInfoListOff;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
     public boolean DeleteStudent(int studentId, int courseId) {
         try {
             Connection conn = dtb.getConnection();
@@ -147,6 +151,7 @@ public class ResultDAO {
                     return true;
                 }
             }
+            conn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             // Xử lý các trường hợp xảy ra lỗi khi thao tác với cơ sở dữ liệu
@@ -155,12 +160,13 @@ public class ResultDAO {
         // Trả về false nếu xóa thất bại hoặc không có dòng nào bị ảnh hưởng
         return false;
     }
+
     public boolean addPerson(Person ps) {
         try {
             Connection conn = dtb.getConnection();
 
             // Câu truy vấn INSERT INTO
-             String getMaxIdQuery = "SELECT MAX(PersonID) FROM Person";
+            String getMaxIdQuery = "SELECT MAX(PersonID) FROM Person";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(getMaxIdQuery);
 
@@ -174,7 +180,7 @@ public class ResultDAO {
 
             // Câu truy vấn INSERT INTO
             String sql = "INSERT INTO Person (personID, LastName, FirstName, HireDate, EnrollmentDate) VALUES (?, ?, ?, ?, ?)";
-            
+
             // Tạo PreparedStatement và thiết lập giá trị cho các tham số
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, ps.getPersonID());
@@ -195,6 +201,7 @@ public class ResultDAO {
             // Thực hiện truy vấn INSERT
             int affectedRows = pstm.executeUpdate();
 
+            conn.close();
             // Kiểm tra xem có dòng nào được thêm vào không
             return affectedRows > 0;
         } catch (SQLException e) {
@@ -202,9 +209,10 @@ public class ResultDAO {
         }
         return false;
     }
+
     public int getMaxPersonID() {
         int maxPersonID = 0;
-        
+
         try {
             Connection conn = dtb.getConnection();
             Statement stmt = conn.createStatement();
@@ -216,13 +224,15 @@ public class ResultDAO {
             if (rs.next()) {
                 maxPersonID = rs.getInt(1);
             }
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return maxPersonID+1;
+        return maxPersonID + 1;
     }
-     public ArrayList<Person> getAllStudent() {
+
+    public ArrayList<Person> getAllStudent() {
         ArrayList<Person> StudentList = new ArrayList<Person>();
         String sql = "SELECT personid, lastname, firstname FROM person WHERE enrollmentdate IS NOT NULL";
         DatabaseAccess db = new DatabaseAccess();
@@ -230,31 +240,33 @@ public class ResultDAO {
             Connection conn = db.getConnection();
             PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Person ps = new Person();
                 ps.setPersonID(rs.getInt("personid"));
                 ps.setLastname(rs.getString("lastname"));
                 ps.setFirstname(rs.getString("firstname"));
                 StudentList.add(ps);
             }
+            conn.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }
         return StudentList;
     }
-     public boolean addStudentGrade(StudentGrade stdGrade, int courseID,int studentID) {
+
+    public boolean addStudentGrade(StudentGrade stdGrade, int courseID, int studentID) {
         try (Connection conn = dtb.getConnection()) {
             // Kiểm tra xem đã tồn tại dòng với cùng CourseID và StudentID chưa
             if (!isDuplicateRecord(conn, courseID, studentID)) {
-                    String getMaxIdQuery = "SELECT MAX(enrollmentID) FROM studentgrade";
-               Statement stmt = conn.createStatement();
-               ResultSet rs = stmt.executeQuery(getMaxIdQuery);
+                String getMaxIdQuery = "SELECT MAX(enrollmentID) FROM studentgrade";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(getMaxIdQuery);
 
-               int maxId = 0;
-               if (rs.next()) {
-                   maxId = rs.getInt(1);
-               }
-               stdGrade.setEnrollmentID(maxId + 1);
+                int maxId = 0;
+                if (rs.next()) {
+                    maxId = rs.getInt(1);
+                }
+                stdGrade.setEnrollmentID(maxId + 1);
                 // Nếu không có trùng lặp, thực hiện thêm dữ liệu
                 String sql = "INSERT INTO studentgrade (enrollmentID, CourseID, StudentID, Grade) VALUES (?, ?, ?, ?)";
                 try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -264,13 +276,15 @@ public class ResultDAO {
                     pstmt.setDouble(4, stdGrade.getGrade());
 
                     int rowsAffected = pstmt.executeUpdate();
-
+                    conn.close();
                     return rowsAffected > 0;
                 }
             } else {
                 // Nếu có trùng lặp, không thêm dữ liệu và trả về false
+                conn.close();
                 return false;
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

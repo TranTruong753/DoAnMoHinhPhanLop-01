@@ -35,7 +35,12 @@ public class DepartmentDAO {
                 tmp.setAdministrator(rs.getInt(5));
                 list.add(tmp);
             }
-            conn.close();
+            if (conn != null) {
+                conn.close();
+
+            }
+            databaseAccess.getConnection().close();
+
             return list;
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -43,5 +48,5 @@ public class DepartmentDAO {
 
         return list;
     }
-    
+
 }

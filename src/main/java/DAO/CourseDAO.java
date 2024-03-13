@@ -16,7 +16,9 @@ import java.util.ArrayList;
  * @author M S I
  */
 public class CourseDAO {
-
+    
+    private DepartmentDAO departmentDAO = new DepartmentDAO();
+    private ArrayList<BUS.Department> listDepartment = departmentDAO.getAll();
     //Lấy tất cả Khóa học trong bảng course
     public ArrayList<Course> getAll() {
         ArrayList<Course> courseList = new ArrayList<Course>();
@@ -110,17 +112,23 @@ public class CourseDAO {
     public ArrayList<Course> findCourse(String key, int selectedIndexCombobox) {
         ArrayList<Course> courseList = new ArrayList<Course>();
         String cln = "";
+        String tmpCondition = "";
         if (selectedIndexCombobox == 0) {
             cln = "CourseID";
+            tmpCondition = "";
         } else if (selectedIndexCombobox == 1) {
             cln = "Title";
+            tmpCondition = "";
         } else if (selectedIndexCombobox == 2) {
             cln = "Credits";
+            tmpCondition = "";
         } else if (selectedIndexCombobox == 3) {
-            cln = "DepartmentID";
+            cln = "department.Name";
+            tmpCondition = "course.DepartmentID = department.DepartmentID and ";
+            
         }
 
-        String sql = "select * from course where " + cln + " like '%" + key + "%'";
+        String sql = "select DISTINCT course.* from course,department where "+tmpCondition+ cln + " like '%" + key + "%'";
         DatabaseAccess db = new DatabaseAccess();
         try {
             Connection conn = db.getConnection();

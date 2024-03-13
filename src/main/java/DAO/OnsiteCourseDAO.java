@@ -34,6 +34,7 @@ public class OnsiteCourseDAO {
                 onsiteCourse.setTime(rs.getTime(4) + "");
                 onsiteCourseList.add(onsiteCourse);
             }
+            conn.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }
@@ -55,6 +56,7 @@ public class OnsiteCourseDAO {
             if (n > 0) {
                 result = true;
             }
+            conn.close();
         } catch (Exception e) {
             System.out.println(e.toString());
         }
@@ -75,7 +77,7 @@ public class OnsiteCourseDAO {
             if (n > 0) {
                 result = true;
             }
-
+            conn.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }
@@ -97,7 +99,7 @@ public class OnsiteCourseDAO {
             if (n > 0) {
                 result = true;
             }
-
+            conn.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }

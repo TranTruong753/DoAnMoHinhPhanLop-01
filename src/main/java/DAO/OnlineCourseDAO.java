@@ -32,6 +32,7 @@ public class OnlineCourseDAO extends DatabaseAccess {
 
                 onlineCourseList.add(onlineCourse);
             }
+             conn.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }
@@ -51,7 +52,7 @@ public class OnlineCourseDAO extends DatabaseAccess {
             if (n > 0) {
                 result = true;
             }
-
+ conn.close();
         } catch (Exception e) {
             System.out.println("Error: " + e.toString());
         }
@@ -67,6 +68,7 @@ public class OnlineCourseDAO extends DatabaseAccess {
             PreparedStatement ps = conn.prepareCall(sql);
             ps.executeUpdate();
             result =true;
+             conn.close();
         } catch (Exception e) {
             System.out.println(e.toString());
         }
@@ -87,6 +89,7 @@ public class OnlineCourseDAO extends DatabaseAccess {
             PreparedStatement ps = conn.prepareCall(sql);
             ps.executeUpdate();
             result =true;
+             conn.close();
         } catch (Exception e) {
             System.out.println(e.toString());
         }
